@@ -1,172 +1,92 @@
+/* ------------------------------------------------------ */
+/*  Tailwind Base Import                                  */
+/* ------------------------------------------------------ */
 @import "tailwindcss";
-@import "tw-animate-css";
-
-
-/* Custom variant for dark mode */
-@custom-variant dark (&:is(.dark *));
 
 /* ------------------------------------------------------ */
-/* THEME VARIABLES (COLORS, FONTS, BACKGROUNDS)           */
+/*  Root color tokens (light mode defaults)               */
 /* ------------------------------------------------------ */
-@theme {
-  /* Success */
-  --color-success-100: #49de50;
-  --color-success-200: #42c748;
+:root {
+  /* Base theme */
+  --background: #ffffff;
+  --foreground: #171717;
 
-  /* Destructive/Error */
-  --color-destructive-100: #f75353;
-  --color-destructive-200: #c44141;
+  /* Success colors */
+  --success-100: #49de50;
+  --success-200: #42c748;
 
-  /* Primary (brand colors) */
-  --color-primary-100: #dddfff;
-  --color-primary-200: #cac5fe;
+  /* Error / Destructive colors */
+  --destructive-100: #f75353;
+  --destructive-200: #c44141;
+
+  /* Primary brand colors */
+  --primary-100: #dddfff;
+  --primary-200: #cac5fe;
 
   /* Light palette */
-  --color-light-100: #d6e0ff;
-  --color-light-400: #6870a6;
-  --color-light-600: #4557dd;
-  --color-light-800: #24273a;
+  --light-100: #d6e0ff;
+  --light-400: #6870a6;
+  --light-600: #4557dd;
+  --light-800: #24273a;
 
   /* Dark palette */
-  --color-dark-100: #020408;
-  --color-dark-200: #27282f;
-  --color-dark-300: #242633;
+  --dark-100: #020408;
+  --dark-200: #27282f;
+  --dark-300: #242633;
 
-  /* Fonts and background pattern */
+  /* Font and background assets */
   --font-mona-sans: "Mona Sans", sans-serif;
-  --bg-pattern: url("/pattern.png");
+  /* --bg-pattern: url("/pattern.png"); */
+  --bg-pattern: #c44141;
 }
 
-/* Inline theme variables for spacing and colors */
+/* ------------------------------------------------------ */
+/*  Inline theme mapping (Tailwind variable bindings)     */
+/* ------------------------------------------------------ */
 @theme inline {
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-success-100: var(--success-100);
+  --color-success-200: var(--success-200);
+
+  --color-destructive-100: var(--destructive-100);
+  --color-destructive-200: var(--destructive-200);
+
+  --color-primary-100: var(--primary-100);
+  --color-primary-200: var(--primary-200);
+
+  --color-light-100: var(--light-100);
+  --color-light-400: var(--light-400);
+  --color-light-600: var(--light-600);
+  --color-light-800: var(--light-800);
+
+  --color-dark-100: var(--dark-100);
+  --color-dark-200: var(--dark-200);
+  --color-dark-300: var(--dark-300);
+
+  --font-sans: var(--font-mona-sans);
 }
 
 /* ------------------------------------------------------ */
-/* BASE LAYER - APPLIES GLOBAL STYLING                    */
+/*  Dark mode overrides                                   */
 /* ------------------------------------------------------ */
-@layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
 
-  body {
-    @apply bg-background text-foreground;
-  }
-
-  p {
-    @apply text-light-100;
-  }
-
-  h2 {
-    @apply text-3xl font-semibold;
-  }
-
-  h3 {
-    @apply text-2xl font-semibold;
-  }
-}
-
-/* ------------------------------------------------------ */
-/* COMPONENT STYLES                                       */
-/* ------------------------------------------------------ */
-@layer components {
-  /* ✅ Call Button */
-  .btn-call {
-    @apply inline-block px-7 py-3 font-bold text-sm leading-5 text-white transition-colors;
-
-    .span {
-      @apply bg-success-100 h-[85%] w-[65%];
-    }
-  }
-
-  /* ✅ Disconnect Button */
-  .btn-disconnect {
-    @apply inline-block px-7 py-3 text-sm font-bold leading-5 text-white transition-colors;
-  }
-
-  /* ✅ Upload Button */
-  .btn-upload {
-    @apply inline-block px-7 py-3 text-sm font-bold leading-5 text-white transition-colors;
-  }
-
-  /* ✅ Tooltip for tech tags */
-  .tech-tooltip {
-    @apply absolute bottom-full mb-1 hidden group-hover:flex px-2 py-1 text-xs text-white bg-dark-300 rounded-md;
-  }
-
-  /* ✅ Interview Card */
-  .card-interview {
-    @apply dark-gradient rounded-2xl min-h-full flex flex-col p-6 relative overflow-hidden gap-3;
-
-    .badge-text {
-      @apply text-sm font-semibold capitalize;
-    }
-  }
-
-  /* ✅ Card border & layout */
-  .card-border {
-    @apply border-gradient p-0.5 rounded-2xl w-fit;
-  }
-
-  .card {
-    @apply dark-gradient rounded-2xl min-h-full;
-  }
-
-  /* ✅ Form styling */
-  .form {
-    @apply w-full;
-
-    .label {
-      @apply text-light-100 font-normal;
-    }
+    /* Slightly dimmer accent tones in dark mode */
+    --primary-100: #cac5fe;
+    --primary-200: #a09bf0;
   }
 }
 
 /* ------------------------------------------------------ */
-/* CUSTOM UTILITIES                                       */
+/*  Global body defaults                                  */
 /* ------------------------------------------------------ */
-@utility dark-gradient {
-  @apply bg-gradient-to-b from-[#1A1C20] to-[#08090D];
-}
-
-@utility border-gradient {
-  @apply bg-gradient-to-b from-[#4B4D4F] to-[#4B4D4F33];
-}
-
-@utility pattern {
-  @apply bg-[url('/pattern.png')] bg-top bg-no-repeat;
-}
-
-/* ✅ Fade-in animation utility */
-@utility animate-fadeIn {
-  animation: fadeIn 0.3s ease-in-out;
-}
-
-/* ------------------------------------------------------ */
-/* KEYFRAMES                                              */
-/* ------------------------------------------------------ */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(5px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
 }
