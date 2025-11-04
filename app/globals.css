@@ -38,6 +38,39 @@
   --font-mona-sans: "Mona Sans", sans-serif;
   /* --bg-pattern: url("/pattern.png"); */
   --bg-pattern: #c44141;
+  --card: #ffffff;
+  --card-foreground: #252525;
+  --popover: #ffffff;
+  --popover-foreground: #252525;
+  --primary: #343434;
+  --primary-foreground: #fafafa;
+  --secondary: #f7f7f7;
+  --secondary-foreground: #343434;
+  --muted: #f7f7f7;
+  --muted-foreground: #8e8e8e;
+  --accent: #f7f7f7;
+  --accent-foreground: #343434;
+  --destructive: #e25a5a;
+  --border: #ebebeb;
+  --input: #ebebeb;
+  --ring: #b3b3b3;
+
+  /* Chart colors */
+  --chart-1: #e07b27;
+  --chart-2: #2e8bc0;
+  --chart-3: #4362d0;
+  --chart-4: #f8c23a;
+  --chart-5: #d89d27;
+
+  /* Sidebar theme */
+  --sidebar: #fbfbfb;
+  --sidebar-foreground: #252525;
+  --sidebar-primary: #343434;
+  --sidebar-primary-foreground: #fafafa;
+  --sidebar-accent: #f7f7f7;
+  --sidebar-accent-foreground: #343434;
+  --sidebar-border: #ebebeb;
+  --sidebar-ring: #b3b3b3;
 }
 
 /* ------------------------------------------------------ */
@@ -73,14 +106,45 @@
 /* ------------------------------------------------------ */
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #252525;
+    --foreground: #fafafa;
+    --card: #333333;
+    --card-foreground: #fafafa;
+    --popover: #333333;
+    --popover-foreground: #fafafa;
+    --primary: #ebebeb;
+    --primary-foreground: #252525;
+    --secondary: #454545;
+    --secondary-foreground: #fafafa;
+    --muted: #454545;
+    --muted-foreground: #d6e0ff;
+    --accent: #454545;
+    --accent-foreground: #fafafa;
+    --destructive: #c4533a;
+    --border: #ffffff1a; /* 10% opacity white */
+    --input: #ffffff26;  /* 15% opacity white */
+    --ring: #8e8e8e;
 
-    /* Slightly dimmer accent tones in dark mode */
-    --primary-100: #cac5fe;
-    --primary-200: #a09bf0;
+    /* Charts */
+    --chart-1: #5a63f2;
+    --chart-2: #50a38a;
+    --chart-3: #d7b83e;
+    --chart-4: #a44de3;
+    --chart-5: #e76f38;
+
+    /* Sidebar */
+    --sidebar: #333333;
+    --sidebar-foreground: #fafafa;
+    --sidebar-primary: #5a63f2;
+    --sidebar-primary-foreground: #fafafa;
+    --sidebar-accent: #454545;
+    --sidebar-accent-foreground: #fafafa;
+    --sidebar-border: #ffffff1a;
+    --sidebar-ring: #8e8e8e;
   }
 }
+
+
 
 /* ------------------------------------------------------ */
 /*  Global body defaults                                  */
@@ -89,4 +153,88 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
+
+@utility dark-gradient {
+  @apply bg-gradient-to-b from-[#1A1C20] to-[#08090D];
+}
+
+@utility border-gradient {
+  @apply bg-gradient-to-b from-[#4B4D4F] to-[#4B4D4F33];
+}
+
+@utility blue-gradient-dark {
+  @apply bg-gradient-to-b from-[#171532] to-[#08090D];
+}
+
+@utility blue-gradient {
+  @apply bg-gradient-to-l from-[#FFFFFF] to-[#CAC5FE];
+}
+
+@utility flex-center {
+  @apply flex items-center justify-center;
+}
+
+@utility pattern {
+  @apply bg-[url('/pattern.png')] bg-top bg-no-repeat;
+}
+
+/* @utility dark-gradient {
+  @apply bg-gradient-to-b from-[#d6e0ff] to-[#4557dd];
+}
+@utility border-gradient {
+  @apply bg-gradient-to-b from-[#4B4D4F] to-[#4B4D4F33];
+} */
+/* ------------------------------------------------------ */
+/*  Custom component layer for reusable classes           */
+/* ------------------------------------------------------ */
+@utility card-border {
+  @apply border-gradient p-0.5 rounded-2xl w-fit;
+}
+
+@utility card {
+  @apply dark-gradient rounded-2xl min-h-full;
+}
+
+@utility form {
+  @apply w-full; 
+
+  .label {
+    @apply !text-light-100 !font-normal; 
+  }
+
+  .input {
+    @apply !bg-dark-200 !rounded-full !min-h-12 !px-5 placeholder:!text-light-100; 
+  }
+
+  .btn {
+    @apply !w-full !bg-primary-200 !text-dark-100 hover:!bg-primary-200/80 
+    !rounded-full !min-h-10 !font-bold !px-5 cursor-pointer;
+  }
+}
+
+@utility btn-call {
+  @apply inline-block px-7 py-3 font-bold text-sm leading-5 text-white bg-success-100 rounded-full shadow-sm transition-colors duration-150 hover:bg-success-200;
+}
+
+@utility btn-disconnect {
+  @apply inline-block px-7 py-3 font-bold text-sm leading-5 text-white bg-destructive-100 rounded-full shadow-sm transition-colors duration-150 hover:bg-destructive-200;
+}
+
+/* ------------------------------------------------------ */
+/*  Animation utilities                                   */
+/* ------------------------------------------------------ */
+@utility animate-fadeIn {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
