@@ -149,6 +149,35 @@
 /* ------------------------------------------------------ */
 /*  Global body defaults                                  */
 /* ------------------------------------------------------ */
+* {
+  border-color: var(--border);
+  outline-color: color-mix(in srgb, var(--ring) 50%, transparent);
+}
+
+p {
+  color: var(--light-100);
+}
+
+h2 {
+  font-size: 1.875rem; /* text-3xl */
+  font-weight: 600;    /* font-semibold */
+}
+
+h3 {
+  font-size: 1.5rem;   /* text-2xl */
+  font-weight: 600;
+}
+
+ul {
+  list-style-type: disc;
+  list-style-position: inside;
+}
+
+li {
+  color: var(--light-100);
+}
+
+
 body {
   background: var(--background);
   color: var(--foreground);
@@ -195,6 +224,9 @@ body {
 @utility card {
   @apply dark-gradient rounded-2xl min-h-full;
 }
+@utility card-interviewer {
+  @apply flex-center flex-col gap-2 p-7 h-[400px] blue-gradient-dark rounded-lg border-2 border-primary-200/50 flex-1 sm:basis-1/2 w-full;
+}
 
 @utility form {
   @apply w-full; 
@@ -217,8 +249,49 @@ body {
   @apply inline-block px-7 py-3 font-bold text-sm leading-5 text-white bg-success-100 rounded-full shadow-sm transition-colors duration-150 hover:bg-success-200;
 }
 
+@utility section-feedback {
+  @apply flex flex-col gap-8 max-w-5xl mx-auto max-sm:px-4 text-lg leading-7;
+
+  .buttons {
+    @apply flex w-full justify-evenly gap-4 max-sm:flex-col max-sm:items-center;
+  }
+}
+
+
+@utility root-layout {
+  @apply flex mx-auto max-w-7xl flex-col gap-12 my-12 px-16 max-sm:px-4 max-sm:my-8;
+}
+
+@utility card-cta {
+  @apply flex flex-row blue-gradient-dark rounded-3xl px-16 py-6 items-center justify-between max-sm:px-4;
+}
+
 @utility btn-disconnect {
   @apply inline-block px-7 py-3 font-bold text-sm leading-5 text-white bg-destructive-100 rounded-full shadow-sm transition-colors duration-150 hover:bg-destructive-200;
+}
+
+@utility interviews-section {
+  @apply flex flex-wrap gap-4 max-lg:flex-col w-full items-stretch;
+}
+
+@utility  interview-text {
+  @apply text-lg text-center text-white;
+}
+
+@utility  progress {
+  @apply h-1.5 text-[5px] font-bold bg-primary-200 rounded-full flex-center;
+}
+
+@utility  tech-tooltip {
+  @apply absolute bottom-full mb-1 hidden group-hover:flex px-2 py-1 text-xs text-white bg-gray-700 rounded-md shadow-md;
+}
+
+@utility  card-interview {
+  @apply dark-gradient rounded-2xl min-h-full flex flex-col p-6 relative overflow-hidden gap-10 justify-between;
+
+  .badge-text {
+    @apply text-sm font-semibold capitalize;
+  }
 }
 
 /* ------------------------------------------------------ */
