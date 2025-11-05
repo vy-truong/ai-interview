@@ -15,6 +15,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { toast } from 'sonner'
 import FormField from './FormField'
+import { useRouter } from 'next/navigation'
 
 const authFormSchema = (type: FormType) => {
     return z.object({
@@ -27,6 +28,7 @@ const authFormSchema = (type: FormType) => {
 type FormType = "sign-in" | "sign-up"
 
 const AuthForm = ({ type }: { type: FormType }) => {
+    const router = useRouter;
     const [error, setError] = useState<string | null>(null);
     const formSchema = authFormSchema(type);
     // 1. Define your form.
@@ -46,10 +48,12 @@ const AuthForm = ({ type }: { type: FormType }) => {
         // console.log(values)
         try{
             if ( type === 'sign-up') {
+                toast.success("Account created successfully. Please sign in")
                 console.log('SIGN UP', values);
                 throw new Error("email alr exist")
             }
             else {
+                toast.success("Sign in successfully.")
                 console.log('SIGN IN', values);
             }
             toast.success(`${isSignin ? "Signed in" : "Account created"} successfully!`)
@@ -61,10 +65,7 @@ const AuthForm = ({ type }: { type: FormType }) => {
         }
     }
 
-
     const isSignin = type === 'sign-in'; 
-    
-
     return (
         <div className="flex items-center justify-center min-h-screen blue-gradient-dark px-4 sm:px-8 md:px-12 lg:px-20">
           <div className="flex flex-col gap-2 card-border w-full max-w-md sm:max-w-lg lg:max-w-xl">
@@ -96,6 +97,8 @@ const AuthForm = ({ type }: { type: FormType }) => {
                     control={form.control}
                     name="password"
                     label="Password"
+                    type='password'
+                    
                     placeholder="Enter your password"
                   />
       

@@ -7,6 +7,8 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { Eye, EyeOff } from "lucide-react"; 
+import { useState } from "react";
 
 interface FormFieldProps<T extends FieldValues> {
   control: Control<T>;
@@ -23,6 +25,9 @@ const FormField = <T extends FieldValues>({
   placeholder,
   type = "text",
 }: FormFieldProps<T>) => {
+
+    const [showPassword, setShowPassword] = useState(false); 
+
   return (
     <Controller
       control={control}
@@ -31,12 +36,29 @@ const FormField = <T extends FieldValues>({
         <FormItem>
           <FormLabel className="label">{label}</FormLabel>
           <FormControl>
-            <Input
-              className="input"
-              type={type}
-              placeholder={placeholder}
-              {...field}
-            />
+            <div className="relative">
+                <Input
+                className="input"
+                type={
+                    type === "password" && !showPassword ? "password": "text"
+                }
+                placeholder={placeholder}
+                {...field}
+                />
+                {type === "password" && (
+                    <button
+                    type="button"
+                    onClick={() => setShowPassword((prev) => !prev)}
+                    className="absolute right-3 top-2.5 text-gray-400 hover:text-gray-200"
+                    >
+                    {showPassword ? (
+                        <EyeOff className="w-5 h-5" />
+                    ) : (
+                        <Eye className="w-5 h-5" />
+                    )}
+                    </button>
+                )}
+              </div>
           </FormControl>
           <FormMessage />
         </FormItem>
