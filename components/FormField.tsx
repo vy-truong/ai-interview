@@ -52,9 +52,9 @@ const FormField = <T extends FieldValues>({
                     className="absolute right-3 top-2.5 text-gray-400 hover:text-gray-200"
                     >
                     {showPassword ? (
-                        <EyeOff className="w-5 h-5" />
+                        <EyeOff className="mt-1 mr-2 w-7 h-5" />
                     ) : (
-                        <Eye className="w-5 h-5" />
+                        <Eye className="mt-1 mr-2 w-7 h-5" />
                     )}
                     </button>
                 )}
