@@ -1,26 +1,318 @@
+/* ------------------------------------------------------ */
+/*  Tailwind Base Import                                  */
+/* ------------------------------------------------------ */
 @import "tailwindcss";
 
+/* ------------------------------------------------------ */
+/*  Root color tokens (light mode defaults)               */
+/* ------------------------------------------------------ */
 :root {
+  /* Base theme */
   --background: #ffffff;
   --foreground: #171717;
+
+  /* Success colors */
+  --success-100: #49de50;
+  --success-200: #42c748;
+
+  /* Error / Destructive colors */
+  --destructive-100: #f75353;
+  --destructive-200: #c44141;
+
+  /* Primary brand colors */
+  --primary-100: #dddfff;
+  --primary-200: #cac5fe;
+
+  /* Light palette */
+  --light-100: #d6e0ff;
+  --light-400: #6870a6;
+  --light-600: #4557dd;
+  --light-800: #24273a;
+
+  /* Dark palette */
+  --dark-100: #020408;
+  --dark-200: #27282f;
+  --dark-300: #242633;
+
+  /* Font and background assets */
+  --font-mona-sans: "Mona Sans", sans-serif;
+  /* --bg-pattern: url("/pattern.png"); */
+  --bg-pattern: #c44141;
+  --card: #ffffff;
+  --card-foreground: #252525;
+  --popover: #ffffff;
+  --popover-foreground: #252525;
+  --primary: #343434;
+  --primary-foreground: #fafafa;
+  --secondary: #f7f7f7;
+  --secondary-foreground: #343434;
+  --muted: #f7f7f7;
+  --muted-foreground: #8e8e8e;
+  --accent: #f7f7f7;
+  --accent-foreground: #343434;
+  --destructive: #e25a5a;
+  --border: #ebebeb;
+  --input: #ebebeb;
+  --ring: #b3b3b3;
+
+  /* Chart colors */
+  --chart-1: #e07b27;
+  --chart-2: #2e8bc0;
+  --chart-3: #4362d0;
+  --chart-4: #f8c23a;
+  --chart-5: #d89d27;
+
+  /* Sidebar theme */
+  --sidebar: #fbfbfb;
+  --sidebar-foreground: #252525;
+  --sidebar-primary: #343434;
+  --sidebar-primary-foreground: #fafafa;
+  --sidebar-accent: #f7f7f7;
+  --sidebar-accent-foreground: #343434;
+  --sidebar-border: #ebebeb;
+  --sidebar-ring: #b3b3b3;
 }
 
+/* ------------------------------------------------------ */
+/*  Inline theme mapping (Tailwind variable bindings)     */
+/* ------------------------------------------------------ */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+
+  --color-success-100: var(--success-100);
+  --color-success-200: var(--success-200);
+
+  --color-destructive-100: var(--destructive-100);
+  --color-destructive-200: var(--destructive-200);
+
+  --color-primary-100: var(--primary-100);
+  --color-primary-200: var(--primary-200);
+
+  --color-light-100: var(--light-100);
+  --color-light-400: var(--light-400);
+  --color-light-600: var(--light-600);
+  --color-light-800: var(--light-800);
+
+  --color-dark-100: var(--dark-100);
+  --color-dark-200: var(--dark-200);
+  --color-dark-300: var(--dark-300);
+
+  --font-sans: var(--font-mona-sans);
 }
 
+/* ------------------------------------------------------ */
+/*  Dark mode overrides                                   */
+/* ------------------------------------------------------ */
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #252525;
+    --foreground: #fafafa;
+    --card: #333333;
+    --card-foreground: #fafafa;
+    --popover: #333333;
+    --popover-foreground: #fafafa;
+    --primary: #ebebeb;
+    --primary-foreground: #252525;
+    --secondary: #454545;
+    --secondary-foreground: #fafafa;
+    --muted: #454545;
+    --muted-foreground: #d6e0ff;
+    --accent: #454545;
+    --accent-foreground: #fafafa;
+    --destructive: #c4533a;
+    --border: #ffffff1a; /* 10% opacity white */
+    --input: #ffffff26;  /* 15% opacity white */
+    --ring: #8e8e8e;
+
+    /* Charts */
+    --chart-1: #5a63f2;
+    --chart-2: #50a38a;
+    --chart-3: #d7b83e;
+    --chart-4: #a44de3;
+    --chart-5: #e76f38;
+
+    /* Sidebar */
+    --sidebar: #333333;
+    --sidebar-foreground: #fafafa;
+    --sidebar-primary: #5a63f2;
+    --sidebar-primary-foreground: #fafafa;
+    --sidebar-accent: #454545;
+    --sidebar-accent-foreground: #fafafa;
+    --sidebar-border: #ffffff1a;
+    --sidebar-ring: #8e8e8e;
   }
 }
+
+
+
+/* ------------------------------------------------------ */
+/*  Global body defaults                                  */
+/* ------------------------------------------------------ */
+* {
+  border-color: var(--border);
+  outline-color: color-mix(in srgb, var(--ring) 50%, transparent);
+}
+
+p {
+  color: var(--light-100);
+}
+
+h2 {
+  font-size: 1.875rem; /* text-3xl */
+  font-weight: 600;    /* font-semibold */
+}
+
+h3 {
+  font-size: 1.5rem;   /* text-2xl */
+  font-weight: 600;
+}
+
+ul {
+  list-style-type: disc;
+  list-style-position: inside;
+}
+
+li {
+  color: var(--light-100);
+}
+
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
+
+@utility dark-gradient {
+  @apply bg-gradient-to-b from-[#1A1C20] to-[#08090D];
+}
+
+@utility border-gradient {
+  @apply bg-gradient-to-b from-[#4B4D4F] to-[#4B4D4F33];
+}
+
+@utility blue-gradient-dark {
+  @apply bg-gradient-to-b from-[#171532] to-[#08090D];
+}
+
+@utility blue-gradient {
+  @apply bg-gradient-to-l from-[#FFFFFF] to-[#CAC5FE];
+}
+
+@utility flex-center {
+  @apply flex items-center justify-center;
+}
+
+@utility pattern {
+  @apply bg-[url('/pattern.png')] bg-top bg-no-repeat;
+}
+
+/* @utility dark-gradient {
+  @apply bg-gradient-to-b from-[#d6e0ff] to-[#4557dd];
+}
+@utility border-gradient {
+  @apply bg-gradient-to-b from-[#4B4D4F] to-[#4B4D4F33];
+} */
+/* ------------------------------------------------------ */
+/*  Custom component layer for reusable classes           */
+/* ------------------------------------------------------ */
+@utility card-border {
+  @apply border-gradient p-0.5 rounded-2xl w-fit;
+}
+
+@utility card {
+  @apply dark-gradient rounded-2xl min-h-full;
+}
+@utility card-interviewer {
+  @apply flex-center flex-col gap-2 p-7 h-[400px] blue-gradient-dark rounded-lg border-2 border-primary-200/50 flex-1 sm:basis-1/2 w-full;
+}
+
+@utility form {
+  @apply w-full; 
+
+  .label {
+    @apply !text-light-100 !font-normal; 
+  }
+
+  .input {
+    @apply !bg-dark-200 !rounded-full !min-h-12 !px-5 placeholder:!text-light-100; 
+  }
+
+  .btn {
+    @apply !w-full !bg-primary-200 !text-dark-100 hover:!bg-primary-200/80 
+    !rounded-full !min-h-10 !font-bold !px-5 cursor-pointer;
+  }
+}
+
+@utility btn-call {
+  @apply inline-block px-7 py-3 font-bold text-sm leading-5 text-white bg-success-100 rounded-full shadow-sm transition-colors duration-150 hover:bg-success-200;
+}
+
+@utility section-feedback {
+  @apply flex flex-col gap-8 max-w-5xl mx-auto max-sm:px-4 text-lg leading-7;
+
+  .buttons {
+    @apply flex w-full justify-evenly gap-4 max-sm:flex-col max-sm:items-center;
+  }
+}
+
+.auth-layout {
+  @apply flex items-center justify-center mx-auto max-w-7xl min-h-screen max-sm:px-4 max-sm:py-8;
+}
+
+@utility root-layout {
+  @apply flex mx-auto max-w-7xl flex-col gap-12 my-12 px-16 max-sm:px-4 max-sm:my-8;
+}
+
+
+@utility card-cta {
+  @apply flex flex-row blue-gradient-dark rounded-3xl px-16 py-6 items-center justify-between max-sm:px-4;
+}
+
+@utility btn-disconnect {
+  @apply inline-block px-7 py-3 font-bold text-sm leading-5 text-white bg-destructive-100 rounded-full shadow-sm transition-colors duration-150 hover:bg-destructive-200;
+}
+
+@utility interviews-section {
+  @apply flex flex-wrap gap-4 max-lg:flex-col w-full items-stretch;
+}
+
+@utility  interview-text {
+  @apply text-lg text-center text-white;
+}
+
+@utility  progress {
+  @apply h-1.5 text-[5px] font-bold bg-primary-200 rounded-full flex-center;
+}
+
+@utility  tech-tooltip {
+  @apply absolute bottom-full mb-1 hidden group-hover:flex px-2 py-1 text-xs text-white bg-gray-700 rounded-md shadow-md;
+}
+
+@utility  card-interview {
+  /* @apply dark-gradient rounded-2xl min-h-full flex flex-col p-6 relative overflow-hidden gap-10 justify-between; */
+  @apply dark-gradient rounded-2xl flex flex-col p-6 relative overflow-hidden gap-4 justify-start;
+
+  .badge-text {
+    @apply text-sm font-semibold capitalize;
+  }
+}
+
+/* ------------------------------------------------------ */
+/*  Animation utilities                                   */
+/* ------------------------------------------------------ */
+@utility animate-fadeIn {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
