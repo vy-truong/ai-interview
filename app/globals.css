@@ -189,7 +189,7 @@ body {
 }
 
 @utility border-gradient {
-  @apply bg-gradient-to-b from-[#7f5af0] to-[#2cb67d];
+  @apply bg-gradient-to-b from-[#4B4D4F] to-[#4B4D4F33];
 }
 
 @utility blue-gradient-dark {
@@ -257,10 +257,14 @@ body {
   }
 }
 
+.auth-layout {
+  @apply flex items-center justify-center mx-auto max-w-7xl min-h-screen max-sm:px-4 max-sm:py-8;
+}
 
 @utility root-layout {
   @apply flex mx-auto max-w-7xl flex-col gap-12 my-12 px-16 max-sm:px-4 max-sm:my-8;
 }
+
 
 @utility card-cta {
   @apply flex flex-row blue-gradient-dark rounded-3xl px-16 py-6 items-center justify-between max-sm:px-4;
@@ -287,13 +291,13 @@ body {
 }
 
 @utility  card-interview {
-  @apply dark-gradient rounded-2xl min-h-full flex flex-col p-6 relative overflow-hidden gap-10 justify-between;
+  /* @apply dark-gradient rounded-2xl min-h-full flex flex-col p-6 relative overflow-hidden gap-10 justify-between; */
+  @apply dark-gradient rounded-2xl flex flex-col p-6 relative overflow-hidden gap-4 justify-start;
 
   .badge-text {
     @apply text-sm font-semibold capitalize;
   }
 }
-
 
 /* ------------------------------------------------------ */
 /*  Animation utilities                                   */
