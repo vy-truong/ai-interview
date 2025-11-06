@@ -4,6 +4,23 @@ import Image from 'next/image';
 import { getRandomInterviewCover } from '@/lib/utils';
 import { Button } from './ui/button';
 import Link from 'next/link';
+import DisplayTechIcons from './DisplayTechIcons';
+
+interface InterviewCardProps {
+    interviewId: string
+    userId: string
+    role: string
+    type: string
+    techstack: string[] 
+    createdAt?: string
+}
+
+export interface Feedback {
+    createdAt?: string;
+    totalScore?: number;
+    finalAssessment?: string;
+  }
+  
 const InterviewCard = async ({
     interviewId,
     userId,
@@ -54,7 +71,7 @@ const InterviewCard = async ({
                 </p>
 
                 <div className='flex flex-row justify-between'>
-                    <p>Tech Icon</p>
+                    <p><DisplayTechIcons techstack={techstack}/></p>
 
                     <Button className='btn-primary'>
                         <Link href={feedback
