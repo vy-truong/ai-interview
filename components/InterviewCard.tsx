@@ -7,7 +7,7 @@ import Link from 'next/link';
 import DisplayTechIcons from './DisplayTechIcons';
 
 interface InterviewCardProps {
-    interviewId: string
+    id: string
     userId: string
     role: string
     type: string
@@ -20,9 +20,9 @@ export interface Feedback {
     totalScore?: number;
     finalAssessment?: string;
   }
-  
+
 const InterviewCard = async ({
-    interviewId,
+    id,
     userId,
     role,
     type,
@@ -76,8 +76,8 @@ const InterviewCard = async ({
                     <Button className='btn-primary'>
                         <Link href={feedback
 
-                            ? `/interview/${interviewId}/feedback`
-                            : `/interview/${interviewId} `
+                            ? `/interview/${id}/feedback`
+                            : `/interview/${id} `
                         }>  
                             {feedback ? 'Check feedback' : 'View Interview'}
                         </Link>
